@@ -2,23 +2,43 @@
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        SwordDamage swordDamage = new();
 
         public MainPage()
         {
             InitializeComponent();
+            swordDamage.SetFlaming(Flaming.IsChecked);
+            swordDamage.SetMagic(Magic.IsChecked);
+            RollDice();
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        private void RollDice()
         {
-            count++;
+            swordDamage.Roll = Random.Shared.Next(1, 7) + Random.Shared.Next(1, 7) +
+                Random.Shared.Next(1, 7);
+            DisplayDamage();
+        }
 
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
+        private void DisplayDamage()
+        {
+            Damage.Text = $"Rolled {swordDamage.Roll} for {swordDamage.Damage} HP";
+        }
 
-            SemanticScreenReader.Announce(CounterBtn.Text);
+        private void Flaming_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            swordDamage.SetFlaming(e.Value);
+            DisplayDamage();
+        }
+
+        private void Magic_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            swordDamage.SetMagic(e.Value);
+            DisplayDamage();
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            RollDice();
         }
     }
 
