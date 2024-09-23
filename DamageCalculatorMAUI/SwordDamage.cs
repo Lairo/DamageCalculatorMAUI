@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace DamageCalculatorMAUI
         public void CalculateDamage()
         {
             Damage = (int)(Roll * MagicMultiplier) + BASE_DAMAGE;
+            Debug.WriteLine($"CalculateDamage set Damage to {Damage} (roll:{Roll})");
         }
 
         public void SetMagic(bool isMagic)
@@ -31,6 +33,7 @@ namespace DamageCalculatorMAUI
                 MagicMultiplier = 1M;
             }
             CalculateDamage();
+            Debug.WriteLine($"SetMagic finished: Damage to {Damage} (roll:{Roll})");
         }
 
         public void SetFlaming(bool isFlaming)
@@ -40,6 +43,7 @@ namespace DamageCalculatorMAUI
             {
                 Damage += FLAME_DAMAGE;
             }
+            Debug.WriteLine($"SetFlaming finished:  Damage to {Damage} (roll:{Roll})");
         }
     }
 }

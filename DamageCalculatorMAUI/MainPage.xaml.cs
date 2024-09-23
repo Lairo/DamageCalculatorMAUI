@@ -7,9 +7,9 @@
         public MainPage()
         {
             InitializeComponent();
+            RollDice();
             swordDamage.SetFlaming(Flaming.IsChecked);
             swordDamage.SetMagic(Magic.IsChecked);
-            RollDice();
         }
 
         private void RollDice()
